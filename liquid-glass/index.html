@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass · zero-blur optical refraction</title>
+<meta name="description" content="A tiny, dependency-free engine that refracts the page behind an element instead of blurring it. SVG feDisplacementMap, chromatic edge, specular rim. MIT.">
+<link rel="stylesheet" href="liquid-glass.css">
+<style>
+  :root { --text: #eef1f6; --mute: #aab3c4; --gold: #e0bd4a; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #0a0c10; color: var(--text); font: 15px/1.55 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif; }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  main { position: relative; z-index: 1; min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; gap: 16px; padding: 16px; }
+  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding: 12px 20px; border-radius: 999px; }
+  header b { font: 400 18px Georgia, serif; letter-spacing: .14em; color: var(--gold); }
+  header a { color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(224, 189, 74, .5); }
+  .stage { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .lens { width: min(380px, 100%); min-height: 230px; padding: 24px 28px; cursor: grab; touch-action: none; user-select: none; border-radius: 26px; }
+  .lens:active { cursor: grabbing; }
+  @media (min-width: 800px) { .lens { margin-top: clamp(40px, 24vh, 260px); margin-left: clamp(0px, 4vw, 80px); } } /* açılışta grafiğin üstünde dursun */
+  @media (max-width: 560px) { header { border-radius: 26px; } }
+  .lens h1 { margin: 0 0 8px; font: 400 27px/1.2 Georgia, serif; }
+  .lens p { margin: 0; color: #e3e8f0; } /* arkadan parlak mum geçerken de okunur */
+  .controls { width: min(330px, 100%); padding: 18px 22px; display: grid; gap: 12px; }
+  .controls label { display: grid; grid-template-columns: 92px 1fr 42px; align-items: center; gap: 10px; font-size: 13px; color: var(--mute); }
+  .controls output { font-variant-numeric: tabular-nums; color: var(--text); text-align: right; }
+  input[type=range] { width: 100%; accent-color: var(--gold); }
+  button { font: inherit; min-height: 40px; color: var(--text); background: transparent; border: 1px solid rgba(224, 189, 74, .55); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+  input[type=range] { min-height: 36px; }
+  header a { display: inline-flex; align-items: center; min-height: 36px; }
+  button:focus-visible, a:focus-visible, .lens:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .notice { margin: 0; font-size: 13px; color: var(--mute); }
+  footer { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  pre { margin: 0; padding: 14px 18px; border-radius: 16px; overflow: auto; max-width: 100%; min-width: 0; font: 12.5px/1.6 'Cascadia Mono', Consolas, monospace; }
+  .badge { padding: 6px 14px; border-radius: 999px; font-variant-numeric: tabular-nums; color: #ffeaa6; --lg-tint: 38, 29, 6; --lg-alpha: .7; }
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<main>
+  <header data-liquid-glass data-lg-bezel="18">
+    <b>LIQUID GLASS</b>
+    <span><a href="README.md">How it works</a> &nbsp;·&nbsp; <a href="https://github.com/itsemreyldz/veblen-releases/tree/main/liquid-glass">Source (MIT)</a> &nbsp;·&nbsp; <a href="https://github.com/itsemreyldz/veblen-releases">Built for VEBLEN</a></span>
+  </header>
+
+  <div class="stage">
+    <section class="lens" id="lens" data-liquid-glass tabindex="0" aria-label="Draggable glass panel. Use the arrow keys to move it.">
+      <h1>No blur. Just light bending.</h1>
+      <p>Drag this panel across the chart. The centre stays sharp; the curved edge pulls the candles and the gold line inward like a convex lens, with a faint colour split.</p>
+    </section>
+
+    <section class="controls" data-liquid-glass aria-label="Lens settings">
+      <label>Edge band <input id="bezel" type="range" min="6" max="48" value="22"><output>22</output></label>
+      <label>Bending <input id="strength" type="range" min="0" max="3" step="0.1" value="1.7"><output>1.7</output></label>
+      <label>Colour split <input id="chroma" type="range" min="0" max="0.3" step="0.01" value="0.09"><output>0.09</output></label>
+      <label>Tint <input id="alpha" type="range" min="0" max="0.9" step="0.05" value="0.55"><output>0.55</output></label>
+      <button id="motion" type="button">Pause motion</button>
+      <p class="notice" id="notice" hidden></p>
+    </section>
+  </div>
+
+  <footer>
+    <pre data-liquid-glass>&lt;link rel="stylesheet" href="liquid-glass.css"&gt;
+&lt;div data-liquid-glass&gt;Hello&lt;/div&gt;
+&lt;script src="glass.js"&gt;&lt;/script&gt;</pre>
+    <span class="badge" data-liquid-glass data-lg-bezel="10">synthetic demo data</span>
+  </footer>
+</main>
+
+<script src="glass.js"></script>
+<script>
+(function () {
+  'use strict';
+  // Background: a synthetic candlestick tape and trend line, only so there is something to refract.
+  var cv = document.getElementById('bg'), g = cv.getContext('2d'), bars = [], offset = 0, last = 0;
+  var seed = 7, rnd = function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  var price = 100;
+  function bar() { var o = price; price = Math.max(55, Math.min(145, price + (rnd() - 0.5) * 9 + (100 - price) * 0.03)); return { o: o, c: price, h: Math.max(o, price) + rnd() * 4, l: Math.min(o, price) - rnd() * 4 }; }
+  for (var i = 0; i < 260; i++) bars.push(bar());
+  function draw() {
+    var d = Math.min(window.devicePixelRatio || 1, 2), w = innerWidth, h = innerHeight, step = 16;
+    if (cv.width !== Math.round(w * d) || cv.height !== Math.round(h * d)) { cv.width = Math.round(w * d); cv.height = Math.round(h * d); }
+    g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(238,241,246,.09)'; g.lineWidth = 1; g.beginPath();
+    for (var x = -offset % 56; x < w; x += 56) { g.moveTo(x, 0); g.lineTo(x, h); }
+    for (var y = 20; y < h; y += 40) { g.moveTo(0, y); g.lineTo(w, y); }
+    g.stroke();
+    var n = Math.ceil(w / step) + 2, Y = function (v) { return h - 30 - ((v - 50) / 100) * (h - 60); }, avg = null;
+    var line = [];
+    for (var k = 0; k < n; k++) {
+      var b = bars[k % bars.length], X = k * step - (offset % step), up = b.c >= b.o;
+      g.strokeStyle = g.fillStyle = up ? '#10b981' : '#e0766f';
+      g.beginPath(); g.moveTo(X, Y(b.h)); g.lineTo(X, Y(b.l)); g.stroke();
+      g.fillRect(X - 4.5, Math.min(Y(b.o), Y(b.c)), 9, Math.max(2, Math.abs(Y(b.c) - Y(b.o))));
+      avg = avg === null ? b.c : b.c * 0.18 + avg * 0.82; line.push([X, Y(avg)]);
+    }
+    g.strokeStyle = '#d4af37'; g.lineWidth = 2.5; g.beginPath();
+    line.forEach(function (p, j) { if (j) g.lineTo(p[0], p[1]); else g.moveTo(p[0], p[1]); }); g.stroke();
+  }
+  var running = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var button = document.getElementById('motion');
+  function label() { button.textContent = running ? 'Pause motion' : 'Play motion'; }
+  function frame(t) {
+    if (running) {
+      var dt = Math.min(0.05, (t - last) / 1000 || 0); offset += dt * 28;
+      if (offset >= 16) { offset -= 16; bars.push(bars.shift()); }
+      draw(); requestAnimationFrame(frame);
+    }
+    last = t;
+  }
+  button.addEventListener('click', function () { running = !running; label(); if (running) { last = performance.now(); requestAnimationFrame(frame); } });
+  addEventListener('resize', draw); label(); draw(); if (running) requestAnimationFrame(frame);
+
+  // Drag (pointer and arrow keys)
+  var lens = document.getElementById('lens'), pos = { x: 0, y: 0 }, from = null;
+  function move(x, y) { pos.x = x; pos.y = y; lens.style.left = x + 'px'; lens.style.top = y + 'px'; }
+  lens.addEventListener('pointerdown', function (e) { from = { x: e.clientX - pos.x, y: e.clientY - pos.y }; lens.setPointerCapture(e.pointerId); });
+  lens.addEventListener('pointermove', function (e) { if (from) move(e.clientX - from.x, e.clientY - from.y); });
+  lens.addEventListener('pointerup', function () { from = null; });
+  lens.addEventListener('keydown', function (e) {
+    var d = { ArrowLeft: [-16, 0], ArrowRight: [16, 0], ArrowUp: [0, -16], ArrowDown: [0, 16] }[e.key];
+    if (d) { e.preventDefault(); move(pos.x + d[0], pos.y + d[1]); }
+  });
+
+  // Settings
+  ['bezel', 'strength', 'chroma', 'alpha'].forEach(function (name) {
+    var input = document.getElementById(name);
+    input.addEventListener('input', function () {
+      input.nextElementSibling.textContent = input.value;
+      if (name === 'alpha') lens.style.setProperty('--lg-alpha', input.value); else { lens.setAttribute('data-lg-' + name, input.value); LiquidGlass.refresh(); }
+    });
+  });
+
+  var notice = document.getElementById('notice');
+  if (!LiquidGlass.supported) { notice.hidden = false; notice.textContent = 'This browser does not run SVG filters inside backdrop-filter, so you see the tinted fallback. Open the page in a Chromium browser to see the refraction.'; }
+  else if (LiquidGlass.reduced) {
+    notice.hidden = false; notice.textContent = 'Your system asks for reduced transparency, so the lens is off. ';
+    var show = document.createElement('button'); show.type = 'button'; show.textContent = 'Show the glass anyway';
+    show.addEventListener('click', function () { LiquidGlass.force(true); notice.hidden = true; });
+    notice.appendChild(show);
+  }
+})();
+</script>
+</body>
+</html>

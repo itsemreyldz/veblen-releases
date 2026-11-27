@@ -1,0 +1,29 @@
+/*! Liquid Glass — MIT License. Pair with glass.js. Tune with: --lg-tint (r, g, b), --lg-alpha, border-radius. */
+:where([data-liquid-glass]) {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 244, 214, .13);
+}
+[data-liquid-glass] { isolation: isolate; }
+
+/* The material lives on ::before, so the element itself carries no filter and nested glass still sees the backdrop. */
+[data-liquid-glass]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: rgba(var(--lg-tint, 11, 13, 17), var(--lg-alpha, .55));
+  backdrop-filter: var(--lg-filter, none);
+  /* specular rim: white light from the top left, warm reflection along the bottom edge */
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, .20),
+    inset -1px -1px 0 rgba(212, 175, 55, .34),
+    inset 0 9px 14px -11px rgba(255, 250, 235, .42),
+    inset 0 -11px 18px -13px rgba(212, 175, 55, .40),
+    inset 0 0 22px -12px rgba(255, 255, 255, .16);
+}
+
+/* No SVG backdrop filters (Firefox, Safari) or reduced transparency: a calmer, denser tint keeps text readable. */
+[data-liquid-glass].lg-fallback::before { background: rgba(var(--lg-tint, 11, 13, 17), var(--lg-fallback-alpha, .86)); }

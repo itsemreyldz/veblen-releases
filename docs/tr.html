@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VEBLEN · Optik Liquid Glass'lı kantitatif terminal</title>
+<meta name="description" content="Borsa İstanbul, küresel piyasalar ve TEFAS için Windows terminali. Rust + Tauri v2, yerel veri, bulanıklıksız optik cam.">
+<meta property="og:title" content="VEBLEN · Kantitatif terminal">
+<meta property="og:description" content="Rust + Tauri v2. Yerel veri. Bulanıklıksız optik cam.">
+<meta property="og:image" content="https://itsemreyldz.github.io/veblen-releases/media/hero-liquid-glass.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://itsemreyldz.github.io/veblen-releases/">
+<link rel="icon" href="media/logo.png">
+<link rel="stylesheet" href="liquid-glass/liquid-glass.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="bar" data-liquid-glass data-lg-bezel="20" aria-label="Ana menü">
+<a class="brand" href="#">VEBLEN</a>
+<ul><li><a href="#neden">Neden VEBLEN</a></li><li><a href="#motorlar">Motorlar</a></li><li><a href="#cam">Liquid Glass</a></li><li><a href="#yenilikler">Yenilikler</a></li><li><a href="#kurulum">Kurulum</a></li></ul>
+<div class="right"><a class="lang" href="./" hreflang="en" lang="en">English</a><a class="btn primary small" href="https://github.com/itsemreyldz/veblen-releases/releases/download/v3.2.1/VEBLEN_3.2.1_x64-setup.exe">İndir</a></div>
+</nav>
+
+<header class="hero"><div class="wrap">
+<h1>Karardan önce her sayı, gerçek camın altında.</h1>
+<p class="lead">Borsa İstanbul, küresel piyasalar ve TEFAS için yerel çalışan Windows terminali. Hesaplar Rust çekirdeğinde yapılır; portföyünüz, defteriniz ve notlarınız bilgisayarınızda kalır.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/itsemreyldz/veblen-releases/releases/download/v3.2.1/VEBLEN_3.2.1_x64-setup.exe">Windows için indir (v3.2.1)</a><a class="btn" href="https://github.com/itsemreyldz/veblen-releases/releases/tag/v3.2.1">Sürüm notları</a><a class="btn" href="https://github.com/itsemreyldz/veblen-releases">GitHub</a></div>
+<div class="trust">
+<p class="fp"><span>SHA-256 parmak izi · VEBLEN_3.2.1_x64-setup.exe · 27 Kasım 2026</span><code id="sha256" class="hash">59df1b6a2c055c343f4bea56dd400d185bc40646d934ca7b1f372673fe2ed881</code></p>
+<aside class="smart" aria-label="Windows SmartScreen bilgisi"><b>Windows SmartScreen uyarısı çıkarsa</b>
+<p>Windows bu uyarıyı henüz yeterince tanınmayan yazılımlarda gösterir; <strong>Ek Bilgi → Yine de Çalıştır</strong> adımıyla güvenle kurabilirsiniz.</p>
+<p>Çalıştırmadan önce indirdiğiniz dosyanın parmak izinin yukarıdakiyle aynı olduğunu doğrulayın: PowerShell'de <code>Get-FileHash .\VEBLEN_3.2.1_x64-setup.exe</code></p></aside>
+</div>
+<p class="facts">Ticari yazılımdır; erişim anahtarı gerekir. Veri ve analizler yatırım danışmanlığı değildir; uygulama emir göndermez.</p>
+<figure class="demo"><video autoplay muted loop playsinline controls preload="metadata" poster="media/hero-liquid-glass.png"><source src="media/hero-demo.mp4" type="video/mp4"><img src="media/hero-demo.gif" alt="Canlı mumlar camın kenarında kırılıyor"></video>
+<figcaption>v3.2.1 sürümünden canlı veriyle kaydedildi: mumlar ve altın trend çizgisi üst çubuğun ve brifing kartının kenarında kırılıyor.</figcaption></figure>
+</div></header>
+
+<section id="neden"><div class="wrap">
+<h2>Neden VEBLEN?</h2><p class="sub">Küçük, yerel ve sayıların nereden geldiğini açıkça söyleyen bir terminal.</p>
+<div class="table"><table>
+<thead><tr><th scope="col"></th><th scope="col">VEBLEN</th><th scope="col">Tipik Electron / web terminali</th></tr></thead>
+<tbody>
+<tr><th scope="row">Motor</th><td>Rust çekirdeği + Windows'un hazır sunduğu WebView2</td><td>Kendi Chromium ve Node.js'ini taşır ya da tarayıcı sekmesinde yaşar</td></tr>
+<tr><th scope="row">Kurulum paketi</th><td><strong>6,4 MB</strong></td><td>Tarayıcı motorunu da taşımak zorunda</td></tr>
+<tr><th scope="row">Bellek, canlı veriyle komuta ekranı</th><td><strong>192 MB</strong> özel çalışma kümesi, 7 süreç (küçültülmüşken 180 MB)</td><td>Burada ölçülmedi</td></tr>
+<tr><th scope="row">Başlatmadan ilk görüntüye</th><td><strong>≈ 1,10 sn</strong> (sıcak disk önbelleği)</td><td>Burada ölçülmedi</td></tr>
+<tr><th scope="row">Bilanço doğrulaması (BIST sanayi)</th><td>İki kaynak karşılaştırılır. Yıl sonu sütunu ara dönemlerden farklı bir enflasyon muhasebesi (TMS 29) tabanındaysa kaynak değiştirilir ve belirtilir. Tutarlar asla yeniden ölçeklenmez</td><td>Veri sağlayıcısına bağlı</td></tr>
+<tr><th scope="row">Kayıtlarınız</th><td>Portföy, defter ve notlar yerel SQLite veritabanında</td><td>Ürüne bağlı</td></tr>
+</tbody></table></div>
+<p class="foot">v3.2.1 ölçümü, 27 Kasım 2026 (AMD Ryzen 5 5600X 6-Core Processor, 32 GB RAM, Windows 11 Pro). Bellek: VEBLEN ve WebView2 alt süreçlerinin özel çalışma kümesi, komuta ekranı oturduktan 60 sn sonra. İlk görüntü: yeniden başlatma yapılmadan beş açılışın ortancası, aynı kodun sınama derlemesinde. Başka ürünler ölçülmediği için onlar adına sayı verilmez.</p>
+</div></section>
+
+<section id="motorlar"><div class="wrap">
+<h2>Dört motor</h2><p class="sub">Ekranlar çalışan uygulamadan, canlı ve herkese açık veriyle alınmıştır. Çok panelli görseller farklı ekranları yan yana gösterir.</p>
+<div class="engines">
+<figure><a href="media/hero-liquid-glass.png"><img src="media/hero-liquid-glass.png" alt="Liquid Glass komuta merkezi" loading="lazy" width="3840" height="2160"></a><figcaption><b>Liquid Glass komuta merkezi</b>Canlı grafik, karar kartı ve brifing; ortası net, kenarı kırıcı, düşük güçte kapalı.</figcaption></figure>
+<figure><a href="media/forensics-xray.png"><img src="media/forensics-xray.png" alt="Adli muhasebe ve akran radarı" loading="lazy" width="3840" height="2160"></a><figcaption><b>Adli muhasebe ve değerleme</b>Yayımlanan tablolardan Beneish, Altman, Piotroski, DuPont, ROIC-WACC, DCF ve 6 eksenli akran radarı.</figcaption></figure>
+<figure><a href="media/bist-radar-grid.png"><img src="media/bist-radar-grid.png" alt="Çoklu grafik, tedbir rozetleri ve endeks simülatörü" loading="lazy" width="3840" height="2160"></a><figcaption><b>BIST mikro yapı radarı</b>2×2 grafik, VBTS tedbir rozetleri, endeks puan simülatörü, haber nöbetçisi ve geri alım takibi.</figcaption></figure>
+<figure><a href="media/command-palette.png"><img src="media/command-palette.png" alt="Komut paleti ve modül merkezi" loading="lazy" width="3840" height="2160"></a><figcaption><b>Komut dili</b>Ctrl+K ile XU100 WHERE ROIC &gt; WACC ya da PIOTROSKI &gt;= 7 gibi taramalar ve Modül Merkezi.</figcaption></figure>
+</div>
+</div></section>
+
+<section id="cam"><div class="wrap">
+<div class="invite" data-liquid-glass data-lg-bezel="30">
+<h2>Cam açık kaynak</h2><p class="sub">Bulanıklık yok: renk ayrışmalı kenar ve parlak çerçeveli SVG mercek, MIT lisansıyla iki dosyada. Bu panel ve üstteki çubuk onu kullanıyor.</p>
+<pre>&lt;link rel="stylesheet" href="liquid-glass.css"&gt;
+&lt;div data-liquid-glass&gt;Merhaba&lt;/div&gt;
+&lt;script src="glass.js"&gt;&lt;/script&gt;</pre>
+<div class="cta"><a class="btn primary" href="liquid-glass/">Canlı demoyu aç</a><a class="btn" href="https://github.com/itsemreyldz/veblen-releases/tree/main/liquid-glass">Kaynağı al</a></div>
+</div>
+</div></section>
+
+<section id="yenilikler"><div class="wrap">
+<h2>Yenilikler</h2><p class="sub">Son sürümlerde değişenler.</p>
+<div class="rel"><div class="rel-h"><b>v3.2.1</b><span class="pill">Güncel</span></div><ul><li>Veri nöbetçisi üst çubukta: kaynak sağlığı rozeti (sağlıklı/toplam), açılır özet (durum, gecikme, kesintide devreye giren yedek) ve Telemetry HUD satırı. En çok 10 dakikada bir yoklanır; pencere küçükken durur.</li><li>Disiplin kilidi artık yalnız kâğıt işlemde değil, İşlem Defteri ve Emir Merdiveni’nde de etkin (limitler kaydedildiğinde): günlük işlem sayısı, günlük gerçekleşen zarar sınırı (TL) ve tek hisse tavanı. Zarar ve tavan satışları engellemez. Gerçekleşmiş işlem onayla, ihlal olarak işaretlenip kaydedilir ve soğuma başlar; aşılan sınır gün bitmeden gevşetilemez.</li><li>Örnek Kurumsal Fon Turu her pakette açık ve salt-okunur: konsolide bilanço, fon içi görünüm, satışsız dengeleme, kriz testi ve vergi adımları. İlk açılışta tek tıkla; kullanıcı verisine yazmaz.</li><li>Walk-Forward: RSI’ya ek olarak EMA kesişimi, MACD, Bollinger kırılımı ve çoklu faktör. Parametre yalnız eğitim diliminde seçilir; sinyal bir sonraki açılışta işlenir.</li><li>Fon dağılımı KAP aylık Portföy Dağılım Raporu’ndan otomatik: yaygın üç rapor şablonu desteklenir ve her sonuç raporun kendi grup toplamıyla doğrulanır. Okunamayan raporlarda tek tıkla CSV/JSON yapıştırma şablonu. PDF ayrı bir süreçte çözülür.</li><li>Düzeltme: katalogda IPB fonunun adı yanlıştı (İstanbul Portföy Birinci Değişken Fon).</li></ul></div>
+<div class="rel"><div class="rel-h"><b>v3.2.0</b></div><ul><li>Enflasyon &amp; Alım Gücü: resmî TÜFE (TCMB) ve gündelik sepet (Eurostat gıda, kira, enerji, ulaştırma) için 24 aylık walk-forward sınamalı tahmin; açıklanan aylar kilitli 6/12 aylık bileşik projeksiyon, zam/kur şoku simülatörü, başabaş çizgisi, nakit erimesi, DRIP, 1–5 yıllık reel servet konisi ve FIRE tarihi.</li><li>BIST İstihbaratı: yabancı oranı akışı, 60 günlük aynı saat dilimine göre 3,5σ hacim anomalisi, geri alım maliyeti, halka arz tavan serisi ve el değiştirme, BIST 30/100 ve MSCI büyüklük adayları, sektör rotasyonu, TCMB faiz duyarlılığı, KAP sonrası getiri dağılımı. Aracı kurum dağılımı ve blok işlem kullanıcı girişidir.</li><li>Türev &amp; Kantitatif: canlı VİOP baz, opsiyon zinciri (IV, Put/Call, Max Pain; açık pozisyon yayımlanmadığı için işlem adedi ağırlıklı ya da girilen), teminat tamamlama eşiği, altın/gümüş makası, ikili Z-skoru ve yarı ömür, korelasyon kırılması, lead-lag (CDS içe aktarılır), Beta/saf alfa, çoklu periyot matrisi.</li><li>Adli Bilanço: Sloan tahakkuk, nakit dönüşüm süresi (ticari borçlar eklendi), borç vade duvarı (çeyreklik takvim dipnottan girilir), Türkçe/İngilizce yönetici uyarıları, Reverse DCF, kur kaydırıcısı, temettü boşluğu ve bedelli/bedelsiz hesabı.</li><li>Aile Ofisi: konsolide bilanço, fon içi X-Ray, Brinson atfı, yalnız alımlı dengeleme, VİOP beta koruması, stopaj ve temettü takvimi, beş tarihsel kriz senaryosu, kademe dengesizliği (girilen defter), VWAP/TWAP ve likidasyon süresi.</li><li>Arena &amp; Operasyon: hisse düellosu, SHA-256 mühürlü yatırım tezi, walk-forward + Monte Carlo, arka plan kural tarayıcısı (masaüstü, Telegram, webhook), kâğıt işlem, disiplin kilidi, gün sonu brifingi, Pazar komite PDF’i, takvim çakışması, veri nöbetçisi, zincirli denetim günlüğü, AES-256 şifreli `.veblen` çalışma alanı, örnek kurumsal portföy, 1200×675 Alpha Card, pencere profilleri, Ctrl+Shift+L gizlilik kilidi.</li><li>Düzeltme: izleme listesinde olmayan BIST kodları (grafik ve 2×2 ızgara) ve katalogdaki fonlar artık doğru piyasadan canlı veri çeker.</li><li>Gizlilik / KVKK metni gerçek mimariye göre yeniden yazıldı ve yeniden onaya sunulur: portföy, defter ve notlar yerel SQLite’ta kalır; lisans sunucusuna anahtar ve cihaz kimliği özetleri gider; satış sırasında oluşan lisans kaydı ve aşırı istekte IP kaydı açıkça belirtilir.</li><li>Paket kapıları: Düz (enflasyon, operasyon), Pro (servet, istihbarat, sektör, göreli değer, likidite, arena), VIP (türev, adli bilanço, aile ofisi, komite bülteni).</li><li>Veritabanı şeması v3 (yalnız ekleme); yükseltmeden önce `backups/pre-schema-v3.db` otomatik alınır.</li></ul></div>
+<div class="rel"><div class="rel-h"><b>v3.1.1</b></div><ul><li>Optik Liquid Glass: yüzeyler artık bulanıklaştırmak yerine ışığı kırıyor. Orta alan net kalır; kavisli kenarda dışbükey mercek bükülmesi, ince renk ayrışması, iç yansıma ve altın/beyaz kıl kenar. Üst çubuk, yüzen kapsüller, fiyat brifing kartı, Hover X-Ray, Telemetry HUD, mikro ticker, komut paleti, modül kartları, pencereler ve grafik üzeri öğeler.</li><li>Grafikte cam canlı fiyat rozeti ve aktif gösterge kapsülleri (değer imleci izler, tıklayınca gösterge kapanır). Camların arkasında odaktaki varlığın gerçek mumları ve trend çizgisi.</li><li>Okunabilirlik: finansal tablolar ve yoğun sayısal hücreler opak; cam üzerindeki metin kontrastı WCAG AA. Düşük güç modunda kırılma süzgeçleri tümüyle kapanır; pencere açıkken alt şerit durur.</li><li>Stopaj düzeltmesi: fon unvanında yalnız “Hisse”, “Teknoloji” ya da “Endeks” geçmesi artık %0 saydırmıyor. %0 yalnız “Hisse Senedi Yoğun Fon” ibareli (yabancı olmayan) fonlarda; yabancı hisse, yabancı endeks, fon sepeti ve diğerlerinde %17,5. Varlık kartı ve stopaj simülatörü aynı kuralı kullanır.</li></ul></div>
+<div class="rel"><div class="rel-h"><b>v3.1.0</b></div><ul><li>Canlı bilanço hattı: BIST için İş Yatırım (KAP mali tabloları, son 28 çeyrek), küresel semboller için Yahoo; yerel SQLite'ta kalıcı. Beneish, Altman, Piotroski, DuPont, ROIC/WACC ve DCF seçili payın tablosuyla otomatik dolar; her kalem elle değiştirilebilir. Bulunamayan kalem “eksik” olarak gösterilir.</li><li>Tarihsel çarpan bantları (F/K, PD/DD, FD/FAVÖK · 5 yıl), net döviz pozisyonu &amp; Kur Avantaj Endeksi, 6 eksenli sektör akran radarı.</li><li>Kaynak tutarlılık denetimi: her BIST sanayi tablosu ikinci kaynakla sınanır. Yıl sonu sütunu ara dönemle uyuşmayan şirketlerde (ör. döviz bazlı raporlayanlar) hiçbir tutar ölçeklenmeden şirketin yayımlanmış tablolarına geçilir ve bu ekranda belirtilir.</li><li>Ctrl+K sorgu dili bilanço alanlarıyla genişledi: `ROIC &gt; WACC`, `FK &lt; 10`, `PDDD &lt; 1.5`, `PIOTROSKI &gt;= 7`, `ALTMAN &gt; 3`; XU030 / XU100 / sektör endeksi evrenleri.</li><li>BIST radarı: VBTS tedbir rozeti (KAP duyuruları), endeks ağırlık &amp; puan katkı simülatörü, KAP + haber anahtar kelime nöbetçisi, geri alım ilerleme çubuğu ve pay alım satım bildirimleri, TCMB / FED / TÜFE şok etki matrisi.</li><li>Grafik: Renko, Kagi ve Line Break gerçek çizim; kalıcı destek/direnç çizgileri ve mum notları; Bar Replay 1×/5×/10×; sürüklenebilir R/R + fiyat adımı + piramit emir merdiveni; 2×2 çoklu grafik ve ikinci ekrana panel koparma; sentetik sepet.</li><li>Ekran katmanları: mikro ticker şeridi, Telemetry HUD (Ctrl+Shift+T), Hover X-Ray, karar yorgunluğu sayacı, küçültünce duran düşük güç modu.</li><li>Portföy: işlem defteri, T+2 takas takvimi, Sankey kâr/zarar akışı, fon çakışması &amp; stopaj simülatörü (fon hisse ağırlıkları kullanıcı girişi), saat bazlı ısı haritası, faktör modeli, optimizatör arayüzü, 5 kurallı işlem öncesi kilit ve Hata Defteri.</li><li>Altyapı: yedek kaynakla hız yarışı, bozuk spike/fitil onaran veri bekçisi, Telegram köprüsü, çok koşullu alarmlar, salt-okunur yerel ağ izleme ekranı, parola şifreli `veblen://` paylaşım, Excel (.xlsx) ve PDF raporu.</li><li>Paket kapıları: Düz (çizim, defter/T+2, kurallar, VBTS), Pro (grafik araçları, BIST radarı, disiplin, köprüler), VIP (bilanço, değerleme, makro matris, fon çakışması, rapor).</li><li>Veritabanı şeması v2 (yalnız ekleme); yükseltmeden önce `backups/pre-schema-v2.db` otomatik alınır.</li></ul></div>
+</div></section>
+
+<section id="kurulum"><div class="wrap">
+<h2>Kurulum</h2><p class="sub">Windows 10 ya da 11, x64.</p>
+<ol class="steps">
+<li><b>İndirin ve doğrulayın</b><p><a href="https://github.com/itsemreyldz/veblen-releases/releases/download/v3.2.1/VEBLEN_3.2.1_x64-setup.exe">VEBLEN_3.2.1_x64-setup.exe</a>. <code>Get-FileHash .\VEBLEN_3.2.1_x64-setup.exe</code> sonucunu üstteki parmak iziyle karşılaştırın.</p></li>
+<li><b>Kurulumu çalıştırın</b><p>SmartScreen çıkarsa parmak izi eşleştikten sonra: Ek Bilgi → Yine de Çalıştır. Güncellemeler yalnız imzası doğrulanırsa kurulur.</p></li>
+<li><b>Erişim anahtarınızı girin</b><p>Bir anahtar bir bilgisayara bağlanır. <a href="https://github.com/itsemreyldz/veblen-releases/issues/new?title=Satın%20alma%20talebi">Anahtar talep edin</a>. Lisans sunucusu anahtarınızın özetini ve özetlenmiş cihaz kimliğini alır.</p></li>
+</ol>
+</div></section>
+
+<footer><div class="wrap"><span>© VEBLEN · tescilli yazılım; MIT yalnız liquid-glass/ klasörü için</span><span>Burada yer alan veri ve analizler yatırım danışmanlığı kapsamında değildir.</span></div></footer>
+<script src="liquid-glass/glass.js"></script>
+<script>if (matchMedia('(prefers-reduced-motion: reduce)').matches) { const v = document.querySelector('video'); v.removeAttribute('autoplay'); v.pause(); }</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VEBLEN · Native quantitative terminal with optical Liquid Glass</title>
+<meta name="description" content="Windows terminal for Borsa İstanbul, global markets and Turkish funds. Rust + Tauri v2, local-first, zero-blur optical glass.">
+<meta property="og:title" content="VEBLEN · Native quantitative terminal">
+<meta property="og:description" content="Rust + Tauri v2. Local-first. Zero-blur optical glass.">
+<meta property="og:image" content="https://itsemreyldz.github.io/veblen-releases/media/hero-liquid-glass.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="tr" href="https://itsemreyldz.github.io/veblen-releases/tr.html">
+<link rel="icon" href="media/logo.png">
+<link rel="stylesheet" href="liquid-glass/liquid-glass.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="bar" data-liquid-glass data-lg-bezel="20" aria-label="Main">
+<a class="brand" href="#">VEBLEN</a>
+<ul><li><a href="#why">Why VEBLEN</a></li><li><a href="#engines">Engines</a></li><li><a href="#glass">Liquid Glass</a></li><li><a href="#install">Install</a></li></ul>
+<div class="right"><a class="lang" href="tr.html" hreflang="tr" lang="tr">Türkçe</a><a class="btn primary small" href="https://github.com/itsemreyldz/veblen-releases/releases/download/v3.2.1/VEBLEN_3.2.1_x64-setup.exe">Download</a></div>
+</nav>
+
+<header class="hero"><div class="wrap">
+<h1>Every number before the decision, under real glass.</h1>
+<p class="lead">A native Windows terminal for Borsa İstanbul, global markets and Turkish funds. Calculations run in a local Rust core; your portfolio, ledger and notes stay on your computer.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/itsemreyldz/veblen-releases/releases/download/v3.2.1/VEBLEN_3.2.1_x64-setup.exe">Download for Windows (v3.2.1)</a><a class="btn" href="https://github.com/itsemreyldz/veblen-releases/releases/tag/v3.2.1">Release notes</a><a class="btn" href="https://github.com/itsemreyldz/veblen-releases">GitHub</a></div>
+<div class="trust">
+<p class="fp"><span>SHA-256 fingerprint · VEBLEN_3.2.1_x64-setup.exe · 27 November 2026</span><code id="sha256" class="hash">59df1b6a2c055c343f4bea56dd400d185bc40646d934ca7b1f372673fe2ed881</code></p>
+<aside class="smart" aria-label="About Windows SmartScreen"><b>If Windows SmartScreen appears</b>
+<p>Windows shows this warning for software that is not yet widely recognised; you can install it with <strong>More info → Run anyway</strong>.</p>
+<p>Before running it, check that your file has the fingerprint above. In PowerShell: <code>Get-FileHash .\VEBLEN_3.2.1_x64-setup.exe</code></p></aside>
+</div>
+<p class="facts">Commercial software: an access key is required. The interface is in Turkish. Not investment advice; it does not place orders.</p>
+<figure class="demo"><video autoplay muted loop playsinline controls preload="metadata" poster="media/hero-liquid-glass.png"><source src="media/hero-demo.mp4" type="video/mp4"><img src="media/hero-demo.gif" alt="Live candles bending at the edge of the glass"></video>
+<figcaption>Recorded from v3.2.1 on live data: the candles and the gold trend line bend at the edges of the top bar and the briefing card.</figcaption></figure>
+</div></header>
+
+<section id="why"><div class="wrap">
+<h2>Why VEBLEN?</h2><p class="sub">Small, local, and explicit about where its numbers come from.</p>
+<div class="table"><table>
+<thead><tr><th scope="col"><span class="visually"></span></th><th scope="col">VEBLEN</th><th scope="col">Typical Electron / web terminal</th></tr></thead>
+<tbody>
+<tr><th scope="row">Engine</th><td>Rust core + the WebView2 runtime Windows already provides</td><td>Ships its own Chromium and Node.js, or lives in a browser tab</td></tr>
+<tr><th scope="row">Installer</th><td><strong>6.4 MB</strong></td><td>Has to carry a browser engine</td></tr>
+<tr><th scope="row">Memory, dashboard on live data</th><td><strong>192 MB</strong> private working set, 7 processes (180 MB minimised)</td><td>Not benchmarked here</td></tr>
+<tr><th scope="row">Launch to first paint</th><td><strong>≈ 1.10 s</strong> with a warm disk cache</td><td>Not benchmarked here</td></tr>
+<tr><th scope="row">Statement verification (BIST industrials)</th><td>Two sources cross-checked. A year-end column on a different inflation-accounting (TMS 29) basis than the interim columns switches the source, visibly. Figures are never rescaled</td><td>Depends on the data vendor</td></tr>
+<tr><th scope="row">Your records</th><td>Portfolio, ledger and notes in a local SQLite database</td><td>Depends on the product</td></tr>
+</tbody></table></div>
+<p class="foot">Measured on v3.2.1, 27 November 2026 (AMD Ryzen 5 5600X 6-Core Processor, 32 GB RAM, Windows 11 Pro). Memory: private working set of VEBLEN and its WebView2 child processes, 60 s after the dashboard settles. First paint: median of five launches without a reboot, on a test build of the same code. Other products were not benchmarked, so no numbers are claimed for them.</p>
+</div></section>
+
+<section id="engines"><div class="wrap">
+<h2>Four engines</h2><p class="sub">Screens from the running app on live public data. Multi-panel images place several screens side by side.</p>
+<div class="engines">
+<figure><a href="media/hero-liquid-glass.png"><img src="media/hero-liquid-glass.png" alt="Liquid Glass command centre" loading="lazy" width="3840" height="2160"></a><figcaption><b>Liquid Glass command centre</b>Live chart, decision card and briefing; sharp in the middle, refracting at the edges, off in low-power mode.</figcaption></figure>
+<figure><a href="media/forensics-xray.png"><img src="media/forensics-xray.png" alt="Forensic scores and peer radar" loading="lazy" width="3840" height="2160"></a><figcaption><b>Forensics &amp; valuation</b>Beneish, Altman, Piotroski, DuPont, ROIC vs WACC, DCF and a 6-axis sector peer radar from published statements.</figcaption></figure>
+<figure><a href="media/bist-radar-grid.png"><img src="media/bist-radar-grid.png" alt="Chart grid, measure badges and index simulator" loading="lazy" width="3840" height="2160"></a><figcaption><b>BIST microstructure radar</b>2×2 charts, exchange volatility-measure badges, index point simulator, news sentinel and buyback tracker.</figcaption></figure>
+<figure><a href="media/command-palette.png"><img src="media/command-palette.png" alt="Command palette and module centre" loading="lazy" width="3840" height="2160"></a><figcaption><b>Command language</b>Ctrl+K screens such as XU100 WHERE ROIC &gt; WACC or PIOTROSKI &gt;= 7, next to the Module Centre.</figcaption></figure>
+</div>
+</div></section>
+
+<section id="glass"><div class="wrap">
+<div class="invite" data-liquid-glass data-lg-bezel="30">
+<h2>The glass is open source</h2><p class="sub">Zero blur: an SVG displacement lens with a colour-split edge and a specular rim, in two files under the MIT licence. This panel and the bar above use it.</p>
+<pre>&lt;link rel="stylesheet" href="liquid-glass.css"&gt;
+&lt;div data-liquid-glass&gt;Hello&lt;/div&gt;
+&lt;script src="glass.js"&gt;&lt;/script&gt;</pre>
+<div class="cta"><a class="btn primary" href="liquid-glass/">Open the live demo</a><a class="btn" href="https://github.com/itsemreyldz/veblen-releases/tree/main/liquid-glass">Get the source</a></div>
+</div>
+</div></section>
+
+<section id="install"><div class="wrap">
+<h2>Install</h2><p class="sub">Windows 10 or 11, x64.</p>
+<ol class="steps">
+<li><b>Download and verify</b><p><a href="https://github.com/itsemreyldz/veblen-releases/releases/download/v3.2.1/VEBLEN_3.2.1_x64-setup.exe">VEBLEN_3.2.1_x64-setup.exe</a>. Run <code>Get-FileHash .\VEBLEN_3.2.1_x64-setup.exe</code> and compare with the fingerprint at the top.</p></li>
+<li><b>Run the installer</b><p>If SmartScreen appears: More info → Run anyway, after the fingerprint matches. Updates install only if their signature verifies.</p></li>
+<li><b>Enter your access key</b><p>One key binds to one computer. <a href="https://github.com/itsemreyldz/veblen-releases/issues/new?title=Access%20key%20request">Request a key</a>. The licence server receives a hash of your key and a hashed device identifier.</p></li>
+</ol>
+</div></section>
+
+<footer><div class="wrap"><span>© VEBLEN · proprietary software; MIT applies only to liquid-glass/</span><span>Data and analyses shown are not investment advice.</span></div></footer>
+<script src="liquid-glass/glass.js"></script>
+<script>if (matchMedia('(prefers-reduced-motion: reduce)').matches) { const v = document.querySelector('video'); v.removeAttribute('autoplay'); v.pause(); }</script>
+</body>
+</html>
